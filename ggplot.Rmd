@@ -28,18 +28,18 @@ weather_df =
 weather_df
 ```
 Create a ggplot.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 ggplot(weather_df, aes(x = tmin, y = tmax)) +
   geom_point()
 ```
 Alternative way to make this plot.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
     geom_point()
 ```
 Saving initial plots, mostly I don't do this.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 scatterplot = 
   weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
@@ -48,20 +48,20 @@ scatterplot =
 scatterplot
 ```
 Adding color...
-```{r}
+```{r, message = FALSE, warning = FALSE}
 weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
     geom_point(aes(color = name), alpha = .4)
 ```
 Why do 'aes' positions matter? If I use 'color =' in a global scale, then all plots in this graph would be influenced.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 weather_df %>%
   ggplot(aes(x = tmin, y = tmax, color = name)) +
     geom_point(alpha = .4) +
     geom_smooth(se = FALSE)
 ```
 Facet!
-```{r}
+```{r, message = FALSE, warning = FALSE}
 weather_df %>%
   ggplot(aes(x = tmin, y = tmax, color = name)) +
     geom_point(alpha = .4) +
@@ -69,7 +69,7 @@ weather_df %>%
     facet_grid(. ~ name)
 ```
 Let's make some interesting plots.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
   geom_point(aes(size = prcp), alpha = .5) +
   geom_smooth(se = FALSE)
@@ -80,16 +80,16 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   facet_grid(. ~ name)
 ```
 Only showing the smooth curve?
-```{r}
+```{r, message = FALSE, warning = FALSE}
 ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
   geom_smooth(se = FALSE) 
 ```
-```{r}
+```{r, message = FALSE, warning = FALSE}
 ggplot(weather_df, aes(x = date, y = tmax)) + 
   geom_hex()
 ```
 More kinds of plots.
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #Histogram
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_histogram()
@@ -97,23 +97,23 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_histogram(position = "dodge", binwidth = 2)
 ```
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #Density plot
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_density(alpha = .4, adjust = .5, color = "blue")
 ```
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #Boxplot
 ggplot(weather_df, aes(x = name, y = tmax)) + 
   geom_boxplot()
 ```
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #Violin plot
 ggplot(weather_df, aes(x = name, y = tmax)) + 
   geom_violin(aes(fill = name), color = "blue", alpha = .5) + 
   stat_summary(fun.y = median, geom = "point", color = "blue", size = 4)
 ```
-```{r}
+```{r, message = FALSE, warning = FALSE}
 #Ridge plot
 ridge_temp =
   ggplot(weather_df, aes(x = tmax, y = name)) + 

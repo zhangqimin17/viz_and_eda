@@ -40,8 +40,6 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
   geom_point()
 ```
 
-    ## Warning: Removed 15 rows containing missing values (geom_point).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> Alternative
 way to make this plot.
 
@@ -50,8 +48,6 @@ weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
     geom_point()
 ```
-
-    ## Warning: Removed 15 rows containing missing values (geom_point).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> Saving
 initial plots, mostly I don’t do this.
@@ -65,8 +61,6 @@ scatterplot =
 scatterplot
 ```
 
-    ## Warning: Removed 15 rows containing missing values (geom_point).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> Adding color…
 
 ``` r
@@ -74,8 +68,6 @@ weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
     geom_point(aes(color = name), alpha = .4)
 ```
-
-    ## Warning: Removed 15 rows containing missing values (geom_point).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-5-1.png)<!-- --> Why do ‘aes’
 positions matter? If I use ‘color =’ in a global scale, then all plots
@@ -88,12 +80,6 @@ weather_df %>%
     geom_smooth(se = FALSE)
 ```
 
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-    ## Warning: Removed 15 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 15 rows containing missing values (geom_point).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> Facet\!
 
 ``` r
@@ -104,12 +90,6 @@ weather_df %>%
     facet_grid(. ~ name)
 ```
 
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-    ## Warning: Removed 15 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 15 rows containing missing values (geom_point).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-7-1.png)<!-- --> Let’s make
 some interesting plots.
 
@@ -118,12 +98,6 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   geom_point(aes(size = prcp), alpha = .5) +
   geom_smooth(se = FALSE)
 ```
-
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
-
-    ## Warning: Removed 3 rows containing missing values (geom_point).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
@@ -134,12 +108,6 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   facet_grid(. ~ name)
 ```
 
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
-    
-    ## Warning: Removed 3 rows containing missing values (geom_point).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-8-2.png)<!-- --> Only showing
 the smooth curve?
 
@@ -148,18 +116,12 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   geom_smooth(se = FALSE) 
 ```
 
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_smooth).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax)) + 
   geom_hex()
 ```
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_binhex).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> More kinds
 of plots.
@@ -170,18 +132,12 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
   geom_histogram()
 ```
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_histogram(position = "dodge", binwidth = 2)
 ```
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_bin).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
 
@@ -191,8 +147,6 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
   geom_density(alpha = .4, adjust = .5, color = "blue")
 ```
 
-    ## Warning: Removed 3 rows containing non-finite values (stat_density).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
@@ -200,8 +154,6 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
 ggplot(weather_df, aes(x = name, y = tmax)) + 
   geom_boxplot()
 ```
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
 
 ![](ggplot_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
@@ -212,10 +164,6 @@ ggplot(weather_df, aes(x = name, y = tmax)) +
   stat_summary(fun.y = median, geom = "point", color = "blue", size = 4)
 ```
 
-    ## Warning: Removed 3 rows containing non-finite values (stat_ydensity).
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_summary).
-
 ![](ggplot_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
@@ -225,9 +173,3 @@ ridge_temp =
     geom_density_ridges(scale = .85)
 ggsave("gglpot_tmp_riage.pdf", ridge_temp)
 ```
-
-    ## Saving 7 x 5 in image
-
-    ## Picking joint bandwidth of 1.84
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_density_ridges).
