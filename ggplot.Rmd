@@ -2,7 +2,7 @@
 title: "ggplot"
 author: "Qimin Zhang"
 date: "9/26/2019"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -53,10 +53,73 @@ weather_df %>%
   ggplot(aes(x = tmin, y = tmax)) +
     geom_point(aes(color = name), alpha = .4)
 ```
-Why do 'aes' positions matter?
+Why do 'aes' positions matter? If I use 'color =' in a global scale, then all plots in this graph would be influenced.
 ```{r}
 weather_df %>%
-  ggplot(aes(x = tmin, y = tmax)) +
-    geom_point(aes(color = name), alpha = .4) +
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+    geom_point(alpha = .4) +
     geom_smooth(se = FALSE)
 ```
+Facet!
+```{r}
+weather_df %>%
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+    geom_point(alpha = .4) +
+    geom_smooth(se = FALSE) +
+    facet_grid(. ~ name)
+```
+Let's make some interesting plots.
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .5) +
+  geom_smooth(se = FALSE)
+
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .5) +
+  geom_smooth(se = FALSE) + 
+  facet_grid(. ~ name)
+```
+Only showing the smooth curve?
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_smooth(se = FALSE) 
+```
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax)) + 
+  geom_hex()
+```
+More kinds of plots.
+```{r}
+#Histogram
+ggplot(weather_df, aes(x = tmax, fill = name)) + 
+  geom_histogram()
+
+ggplot(weather_df, aes(x = tmax, fill = name)) + 
+  geom_histogram(position = "dodge", binwidth = 2)
+```
+```{r}
+#Density plot
+ggplot(weather_df, aes(x = tmax, fill = name)) + 
+  geom_density(alpha = .4, adjust = .5, color = "blue")
+```
+```{r}
+#Boxplot
+ggplot(weather_df, aes(x = name, y = tmax)) + 
+  geom_boxplot()
+```
+```{r}
+#Violin plot
+ggplot(weather_df, aes(x = name, y = tmax)) + 
+  geom_violin(aes(fill = name), color = "blue", alpha = .5) + 
+  stat_summary(fun.y = median, geom = "point", color = "blue", size = 4)
+```
+```{r}
+#Ridge plot
+ridge_temp =
+  ggplot(weather_df, aes(x = tmax, y = name)) + 
+    geom_density_ridges(scale = .85)
+ggsave("gglpot_tmp_riage.pdf", ridge_temp)
+```
+
+
+
