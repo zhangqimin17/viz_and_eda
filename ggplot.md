@@ -3,6 +3,8 @@ ggplot
 Qimin Zhang
 9/26/2019
 
+# Lecture 1
+
 ``` r
 weather_df = 
   rnoaa::meteo_pull_monitors(c("USW00094728", "USC00519397", "USS0023B17S"),
@@ -40,8 +42,8 @@ ggplot(weather_df, aes(x = tmin, y = tmax)) +
   geom_point()
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> Alternative
-way to make this plot.
+<img src="ggplot_files/figure-gfm/unnamed-chunk-2-1.png" width="90%" />
+Alternative way to make this plot.
 
 ``` r
 weather_df %>%
@@ -49,8 +51,8 @@ weather_df %>%
     geom_point()
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> Saving
-initial plots, mostly I don’t do this.
+<img src="ggplot_files/figure-gfm/unnamed-chunk-3-1.png" width="90%" />
+Saving initial plots, mostly I don’t do this.
 
 ``` r
 scatterplot = 
@@ -61,7 +63,8 @@ scatterplot =
 scatterplot
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> Adding color…
+<img src="ggplot_files/figure-gfm/unnamed-chunk-4-1.png" width="90%" />
+Adding color…
 
 ``` r
 weather_df %>%
@@ -69,9 +72,9 @@ weather_df %>%
     geom_point(aes(color = name), alpha = .4)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-5-1.png)<!-- --> Why do ‘aes’
-positions matter? If I use ‘color =’ in a global scale, then all plots
-in this graph would be influenced.
+<img src="ggplot_files/figure-gfm/unnamed-chunk-5-1.png" width="90%" />
+Why do ‘aes’ positions matter? If I use ‘color =’ in a global scale,
+then all plots in this graph would be influenced.
 
 ``` r
 weather_df %>%
@@ -80,7 +83,8 @@ weather_df %>%
     geom_smooth(se = FALSE)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-6-1.png)<!-- --> Facet\!
+<img src="ggplot_files/figure-gfm/unnamed-chunk-6-1.png" width="90%" />
+Facet\!
 
 ``` r
 weather_df %>%
@@ -90,8 +94,8 @@ weather_df %>%
     facet_grid(. ~ name)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-7-1.png)<!-- --> Let’s make
-some interesting plots.
+<img src="ggplot_files/figure-gfm/unnamed-chunk-7-1.png" width="90%" />
+Let’s make some interesting plots.
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
@@ -99,7 +103,7 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   geom_smooth(se = FALSE)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-8-1.png" width="90%" />
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
@@ -108,23 +112,23 @@ ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
   facet_grid(. ~ name)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-8-2.png)<!-- --> Only showing
-the smooth curve?
+<img src="ggplot_files/figure-gfm/unnamed-chunk-8-2.png" width="90%" />
+Only showing the smooth curve?
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
   geom_smooth(se = FALSE) 
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-9-1.png" width="90%" />
 
 ``` r
 ggplot(weather_df, aes(x = date, y = tmax)) + 
   geom_hex()
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> More kinds
-of plots.
+<img src="ggplot_files/figure-gfm/unnamed-chunk-10-1.png" width="90%" />
+More kinds of plots.
 
 ``` r
 #Histogram
@@ -132,14 +136,14 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
   geom_histogram()
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-11-1.png" width="90%" />
 
 ``` r
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_histogram(position = "dodge", binwidth = 2)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-11-2.png" width="90%" />
 
 ``` r
 #Density plot
@@ -147,7 +151,7 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
   geom_density(alpha = .4, adjust = .5, color = "blue")
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-12-1.png" width="90%" />
 
 ``` r
 #Boxplot
@@ -155,7 +159,7 @@ ggplot(weather_df, aes(x = name, y = tmax)) +
   geom_boxplot()
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-13-1.png" width="90%" />
 
 ``` r
 #Violin plot
@@ -164,7 +168,7 @@ ggplot(weather_df, aes(x = name, y = tmax)) +
   stat_summary(fun.y = median, geom = "point", color = "blue", size = 4)
 ```
 
-![](ggplot_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+<img src="ggplot_files/figure-gfm/unnamed-chunk-14-1.png" width="90%" />
 
 ``` r
 #Ridge plot
@@ -172,4 +176,114 @@ ridge_temp =
   ggplot(weather_df, aes(x = tmax, y = name)) + 
     geom_density_ridges(scale = .85)
 ggsave("gglpot_tmp_riage.pdf", ridge_temp)
+```
+
+# Lecture 2
+
+Labels and ticks.
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum Temp",
+    y = "Maximum Temp",
+    caption = "Data from the rnoaa package"
+  ) +
+  scale_x_continuous(
+    breaks = c(-15, -5, 20),
+    labels = c("-15", "-5", "20")
+  )
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+<img src="ggplot_files/figure-gfm/unnamed-chunk-16-1.png" width="90%" />
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) +
+  labs(
+    title = "Temperature plot",
+    x = "Minimum Temp",
+    y = "Maximum Temp",
+    caption = "Data from the rnoaa package"
+  ) +
+  scale_x_continuous(
+    breaks = c(-15, -5, 20),
+    labels = c("-15", "-5", "20")
+  ) +
+  scale_y_continuous(
+    trans = "sqrt", 
+    position = "right")
+```
+
+    ## Warning in self$trans$transform(x): NaNs produced
+
+    ## Warning: Transformation introduced infinite values in continuous y-axis
+
+    ## Warning: Removed 90 rows containing missing values (geom_point).
+
+<img src="ggplot_files/figure-gfm/unnamed-chunk-17-1.png" width="90%" />
+
+``` r
+# or scale_y_sqrt()
+```
+
+Colors and themes.
+
+``` r
+weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package") + 
+  scale_color_hue(name = "Location", h = c(100, 300))
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+<img src="ggplot_files/figure-gfm/unnamed-chunk-18-1.png" width="90%" />
+
+``` r
+gg_temp_plot = 
+  weather_df %>% 
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = .5) + 
+  labs(
+    title = "Temperature plot",
+    x = "Minimum daily temperature (C)",
+    y = "Maxiumum daily temperature (C)",
+    caption = "Data from the rnoaa package"
+  ) + 
+  viridis::scale_color_viridis(
+    name = "Location", 
+    discrete = TRUE
+  )
+
+gg_temp_plot
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+<img src="ggplot_files/figure-gfm/unnamed-chunk-19-1.png" width="90%" />
+
+``` r
+gg_temp_plot + 
+  theme_minimal() + 
+  theme(legend.position = "bottom")
+```
+
+    ## Warning: Removed 15 rows containing missing values (geom_point).
+
+<img src="ggplot_files/figure-gfm/unnamed-chunk-20-1.png" width="90%" />
+
+``` r
+#Don't reverse the order!
 ```
