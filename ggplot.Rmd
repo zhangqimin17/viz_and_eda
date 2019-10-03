@@ -304,4 +304,100 @@ fas_data %>%
   geom_violin() + 
   facet_grid(day_of_tx ~ outcome)
 ```
+# Lecture 3
+Create the weather data by month.
+```{r, message=FALSE, warning=FALSE}
+weather_df = 
+  rnoaa::meteo_pull_monitors(c("USW00094728", "USC00519397", "USS0023B17S"),
+                      var = c("PRCP", "TMIN", "TMAX"), 
+                      date_min = "2017-01-01",
+                      date_max = "2017-12-31") %>%
+  mutate(
+    name = recode(id, USW00094728 = "CentralPark_NY", 
+                      USC00519397 = "Waikiki_HA",
+                      USS0023B17S = "Waterhole_WA"),
+    tmin = tmin / 10,
+    tmax = tmax / 10,
+    month = lubridate::floor_date(date, unit = "month")) %>%
+  select(name, id, date, month, everything())
+```
+Group by yand counting.
+```{r}
+weather_df %>%
+  group_by(name, month)
+```
+```{r}
+weather_df %>%
+  group_by(month) %>%
+  summarize(n_obs = n(),
+            n_unique = n_distinct(date))
+```
+```{r}
+weather_df %>%
+  count(name, month) %>%
+  knitr::kable()
+```
+2*2 tables
+```{r}
+weather_df %>%
+  mutate(
+    cold = case_when(
+      tmax < 5 ~"cold",
+      tmin > 25 ~ "hot",
+      TRUE ~ ""
+    )
+  ) %>%
+  group_by(name, cold) %>%
+  count() %>%
+  filter(name != "Waikiki_HA") %>% 
+  janitor::tabyl(name, cold)
+```
+General summaries.
+```{r}
+weather_df %>%
+  drop_na() %>%
+  group_by(name, month) %>%
+  summarize(
+    mean_tmax = mean(tmax),
+    mean_prec = mean(prcp, na.rm = TRUE),
+    median_tmax = median(tmax),
+    sd_tmax = sd(tmax)
+  ) %>%
+  ggplot(aes(x = month, y = mean_tmax, color = name)) + 
+    geom_point() + geom_line() + 
+    theme(legend.position = "bottom")
+```
+```{r}
+weather_df %>%
+  drop_na() %>%
+  group_by(name, month) %>%
+  summarize(mean_tmax = mean(tmax)) %>% 
+  pivot_wider(
+    names_from = name,
+    values_from = mean_tmax) %>% 
+  knitr::kable(digits = 1)
+```
+
+```{r}
+weather_df %>%
+  drop_na() %>%
+  group_by(name) %>%
+  mutate(centered_tmax = tmax - mean(tmax)) %>% 
+  ggplot(aes(x = date, y = centered_tmax, color = name)) + 
+    geom_point() 
+```
+```{r}
+weather_df %>%
+  group_by(name, month) %>%
+  mutate(temp_ranking = min_rank(tmax)) %>%
+  filter(temp_ranking == 1)
+```
+```{r}
+weather_df %>%
+  group_by(name) %>%
+  mutate(temp_change = tmax - lag(tmax)) %>%
+  summarize(temp_change_sd = sd(temp_change, na.rm = TRUE),
+            temp_change_max = max(temp_change, na.rm = TRUE))
+```
+
 
